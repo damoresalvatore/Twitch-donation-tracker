@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <title>Bootstrap Example</title>
@@ -26,13 +25,10 @@
         Do Manipilations
         Display the results to stream
         Save to text file
-        
-    First steps:
-        - Read from text file
-        - Save to text file
 
     Writing to completed incentives:
-        - When incentive met, add to achieved incentives
+        - When incentive met, mark JSON as complete
+        - Write to completed text file.
         - hajdas \n
         
         title
@@ -59,8 +55,9 @@
         
 //      Games array, that you iterate through to get to different games
 //      Access like this: testme.games[1].incentives[0].money
+        console.log(jsonstuff);
         testme = JSON.parse(jsonstuff);
-
+        
         console.log(donationtotal);
         
 //      Write dummy stuff to the json file
@@ -69,19 +66,38 @@
 //      Use small php server side script to save the text file
         
        /*Get the current game*/
-        $.getJSON("https://api.twitch.tv/kraken/streams/Destiny.json?callback=?", function(channel) {
-                console.log(channel);
-                if (channel["stream" == null]) {
-                    
-                } else {
-                    cucked = channel["stream"];
-                    console.log(cucked["game"]);
-                }
-            });
-        
+//        $.getJSON("https://api.twitch.tv/kraken/streams/Destiny.json?callback=?", function(channel) {
+//                console.log(channel);
+//                if (channel["stream" == null]) {
+//                    
+//                } else {
+//                    cucked = channel["stream"];
+//                    console.log(cucked["game"]);
+//                }
+//            });
+//        
         var trolling = 1;
         
         var myvar = function(){
+            
+            $.ajax
+            ({
+                type: "GET",
+                dataType : 'json',
+                async: false,
+                url: "https://api.twitch.tv/kraken/streams/Destiny.json?callback=?",
+                data: { data: JSON.stringify(testme) },
+                success: function (channel) {
+                    console.log(channel);
+                    if (channel["stream" == null]) {
+
+                    } else {
+                        cucked = channel["stream"];
+                        console.log(cucked["game"]);
+                    } 
+                },
+                failure: function() {alert("Error!");}
+            });
             
 //            test operation
             testme.games[0].Name = "The Legend of Lonk" + trolling + " ";
