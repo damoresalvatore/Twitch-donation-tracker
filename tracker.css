@@ -1,0 +1,18 @@
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+
+#frame {
+    height: 720px;
+    width: 1280px;
+    background-color: blue;
+    position: relative;
+}
+
+#donationticker {
+    bottom: 0px;
+    position: absolute;
+    color: white;
+    font-family: Impact;
+}

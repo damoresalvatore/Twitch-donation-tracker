@@ -3,15 +3,23 @@
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="tracker.css">
 <!--
   <link rel="stylesheet" type="text/css" href="../../assets/bootstrap-3.3.4-dist/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="streams.css">
   <script src="../../assets/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="streams.js"></script>
 -->
+    <script src="tacker.js"></script>
   <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
 <body>
+    
+    <div id="frame">
+        <div id="donationticker">
+            <p> Test donation </p>
+        </div>
+    </div>
     
 <!--
 
@@ -80,28 +88,34 @@
         
         var myvar = function(){
             
-            $.ajax
-            ({
-                type: "GET",
-                dataType : 'json',
-                async: false,
-                url: "https://api.twitch.tv/kraken/streams/Destiny.json?callback=?",
-                data: { data: JSON.stringify(testme) },
-                success: function (channel) {
-                    console.log(channel);
-                    if (channel["stream" == null]) {
-
-                    } else {
-                        cucked = channel["stream"];
-                        console.log(cucked["game"]);
-                    } 
-                },
-                failure: function() {alert("Error!");}
-            });
+            // Need to interface with these.
+            
+            var currentGameBaseline = 0;
+            var currentIncentive = "";
+            var nextIncentive = "";
+            var donationTotal = "";
+            var currentRequired = 0;
+            var nextRequired = 0;
+            var gameTitle = "";
+            
+            // Retrieve the amount donated the whole marathon
+            donationTotal = getSessionTotal();
+            var channel = getStreamTitle();
+            
+            console.log(channel);
+            
+            // RESUME FROM HERE, WE HAVE GAME NAME
+            
+//            if (channel.stream == "null") {
+//
+//            } else {
+//            } 
             
 //            test operation
-            testme.games[0].Name = "The Legend of Lonk" + trolling + " ";
+            testme.games[0].Name = "The Legend of Lonk" + 5 + " ";
             
+            
+//          Call PHP that saves the jsn file.
             $.ajax
             ({
                 type: "GET",
@@ -113,6 +127,7 @@
                 failure: function() {alert("Error!");}
             });
             
+            console.log(testme);
             console.log("hello");
             setTimeout(myvar,1000);
         }
