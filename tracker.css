@@ -6,13 +6,24 @@ html, body {
 #frame {
     height: 720px;
     width: 1280px;
-    background-color: blue;
     position: relative;
 }
 
 #donationticker {
     bottom: 0px;
     position: absolute;
-    color: white;
+    color: red;
+    font-size: 40px;
+    font-family: serif;
+    padding-left: 15px;
+}
+
+#dollarvalue {
+    bottom: 0px;
+    right: 0px;
+    position: absolute;
+    color: red;
+    font-size: 40px;
     font-family: Impact;
+     padding-right: 15px;
 }
