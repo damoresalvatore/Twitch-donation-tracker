@@ -12,11 +12,15 @@
 -->
     <script src="tracker.js"></script>
   <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 </head>
 <body>
     
     <div id="frame">
         <div id="donationticker">
+            <p> Test donation </p>
+        </div>
+        <div id="nextInc">
             <p> Test donation </p>
         </div>
         <div id="dollarvalue">
@@ -39,6 +43,8 @@
                     },
                     failure: function() {}
                 });
+            
+                $('#donationticker').toggle("slide",{direction:'down',size:10},3000);
                 
                 $.ajax
                 ({
@@ -48,6 +54,19 @@
                     url: 'Tracker2.txt',
                     cache: false,
                     success: function (data) {
+                        $("#nextInc").text(data);
+                    },
+                    failure: function() {}
+                });
+            
+                 $.ajax
+                ({
+                    type: "GET",
+                    dataType : 'Text',
+                    async: false,
+                    url: 'TwitchAlerts/session_donation_amount.txt',
+                    cache: false,
+                    success: function (data) {
                         $("#dollarvalue").text(data);
                     },
                     failure: function() {}
@@ -55,7 +74,7 @@
             
                 // If less than raised, set current, then set next
                 
-                setTimeout(myvar,2000);    
+                setTimeout(myvar,5000);    
             }
 
         

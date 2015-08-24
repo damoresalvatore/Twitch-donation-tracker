@@ -25,6 +25,13 @@
     </div>
     
     <script>
+        $.ajax({ 
+            url: 'sendFTP.php',
+            success: function() {
+                alert("hello");
+            }
+        });
+        
         //      Get the text file
         var xmlhttp, jsonstuff, sessionTotal;
         xmlhttp = new XMLHttpRequest();
@@ -72,23 +79,28 @@
                 incentiveObject.games[gameIndicator].baseline = sessionTotal;
                 incentiveObject.games[gameIndicator].touched = true
             } else {
-                // Money first
+                // This implies that we don't go BACK to another game once our game is done.
+                // We set a baseline for which we start a game, so that all money is relative from there on out
                 currentRaised = sessionTotal - incentiveObject.games[gameIndicator].baseline;
                 
+                // Iterate through all of the incentives
                 for (i = 0; i < incentiveObject.games[gameIndicator].incentives.length; i++) {
                     currentIncentiveNum = 0;
-                    //If complete is false, check money.
+                    
+                    //If incentive complete is false, check money.
                     if (incentiveObject.games[gameIndicator].incentives[i].complete == false) {
+                        
                         // Set to complete if we have raised more money than the current incentive.
                         if (currentRaised >= incentiveObject.games[gameIndicator].incentives[i].money){
                             incentiveObject.games[gameIndicator].incentives[i].complete = true;
                         } else if (currentRaised < incentiveObject.games[gameIndicator].incentives[i].money) {
+                           
                             // Set the current Incentives
                             currentIncentiveNum = i;
                             break;
                         }
                     } else {
-                        // Set the 
+                        // Set the currentIncentive to the final incentive
                         currentIncentiveNum = incentiveObject.games[gameIndicator].incentives.length - 1;
                     }
                 }
@@ -97,19 +109,23 @@
                 if (currentIncentiveNum == incentiveObject.games[gameIndicator].incentives.length - 1 && currentRaised>= incentiveObject.games[gameIndicator].incentives[currentIncentiveNum].money) {
                     currentIncentive = "all incentives met in this game";
                 } else {
-                
+                    
+                    // Calculate the money left until the next incentive is reached
                     var globaTotal = incentiveObject.games[gameIndicator].incentives[currentIncentiveNum].money + incentiveObject.games[gameIndicator].baseline;
+                    
                     var remainingUntil = globaTotal - sessionTotal;
                     currentIncentive = "$" + remainingUntil + " until " + incentiveObject.games[gameIndicator].incentives[currentIncentiveNum].desc + "";
                     
+                    // Set the next incentive to be the incentive that follows current, but if current is the last
+                    // Then set the next to be done, so we can not display it
                     if (currentIncentiveNum + 1 <= incentiveObject.games[gameIndicator].incentives.length - 1) {
-                        nextIncentive = "" + incentiveObject.games[gameIndicator].incentives[currentIncentiveNum + 1].desc + ""
-                    } else {
-                        nextIncentive = "weow";
-                    }
+                        var globaTotal = incentiveObject.games[gameIndicator].incentives[currentIncentiveNum + 1].money + incentiveObject.games[gameIndicator].baseline;
                     
-                    $("#donationticker").text("$" + remainingUntil + " until " + incentiveObject.games[gameIndicator].incentives[currentIncentiveNum].desc + "");
-        
+                    var remainingUntil = globaTotal - sessionTotal;
+                        nextIncentive = "$" + remainingUntil + " until " + incentiveObject.games[gameIndicator].incentives[currentIncentiveNum + 1].desc + ""
+                    } else {
+                        nextIncentive = "done";
+                    }
                 }
                 
                 // Setup the dollar value in the bottom right
@@ -118,6 +134,8 @@
                 
                    
             }
+            
+// Because OBS is stupid and won't stop caching, we have to save the incentives to text file, then a second script will display these on screen.
 
 //          Call PHP that saves the jsn file.
             $.ajax
@@ -159,7 +177,6 @@
             
             setTimeout(myvar,2000);
         }
-        
         myvar();
     </script>
 </body>

@@ -27,3 +27,12 @@ html, body {
     font-family: Impact;
      padding-right: 15px;
 }
+
+#nextInc {
+    bottom: 70px;
+    position: absolute;
+    color: red;
+    font-size: 40px;
+    font-family: serif;
+    padding-left: 15px;
+}
