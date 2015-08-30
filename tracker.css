@@ -9,30 +9,56 @@ html, body {
     position: relative;
 }
 
-#donationticker {
+#timer {
+    text-align: center;
+    left: 0px;
     bottom: 0px;
     position: absolute;
-    color: red;
-    font-size: 40px;
-    font-family: serif;
+    height: 60px;
+    color: white;
+    font-size: 50px;
+    font-family: Impact;
     padding-left: 15px;
+    padding-right: 15px;
+    width: 160px;
+}
+
+#donationticker {
+    white-space: nowrap;
+    overflow: hidden;
+    left: 200px;
+    bottom: 0px;
+    width: 800px;
+    position: absolute;
+    color: white;
+    height: 55px;
+    font-size: 45px;
+    font-family: Impact;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 #dollarvalue {
     bottom: 0px;
     right: 0px;
     position: absolute;
-    color: red;
-    font-size: 40px;
+    color: white;
+    font-size: 45px;
     font-family: Impact;
-     padding-right: 15px;
+    padding-right: 15px;
+    z-index: 10;
+    padding-left: 15px;
 }
 
-#nextInc {
-    bottom: 70px;
+#slideshow {
+    background-position:center; 
+    width: 800px;
+    background-repeat: no-repeat;
+    z-index: 9;
+    background-image: url(hello.png);
     position: absolute;
-    color: red;
-    font-size: 40px;
-    font-family: serif;
-    padding-left: 15px;
+    bottom: 0px;
+    left: 200px;
+    height: 55px;
+    width: 700px;
 }

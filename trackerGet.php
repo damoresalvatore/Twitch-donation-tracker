@@ -11,74 +11,87 @@
   <script type="text/javascript" src="streams.js"></script>
 -->
     <script src="tracker.js"></script>
-  <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="trackerGet.js"></script>
 </head>
 <body>
     
     <div id="frame">
-        <div id="donationticker">
-            <p> Test donation </p>
+        <div id="timer">
+            <p> 00:00:00 </p>
         </div>
-        <div id="nextInc">
+        <div id="donationticker">
             <p> Test donation </p>
         </div>
         <div id="dollarvalue">
             <p> Total Raised </p>
         </div>
+        <div id="slideshow"></div>
     </div>
     
     <script>
+        var waitTimer = 10000;
+        $('#slideshow').toggle("slide",{direction:'left',size:10},2000);
+        returnInc();
         var myvar = function(){
 
-                $.ajax
-                ({
-                    type: "GET",
-                    dataType : 'Text',
-                    async: false,
-                    url: 'Tracker.txt',
-                    cache: false,
-                    success: function (data) {
-                        $("#donationticker").text(data);
-                    },
-                    failure: function() {}
-                });
-            
-                $('#donationticker').toggle("slide",{direction:'down',size:10},3000);
+                /*
+                    Only two incentives
+                    Capable of adding new slides.
+                    Show logo
+                    Show charity logo
+                    Addition of simple phrases.
+                */
+                showMoney();
+                showIncentiveOne();
+                setTimeout(showMoney,2*waitTimer-2000);
+                setTimeout(returnInc,2*waitTimer-2000);
+
+                setTimeout(showIncentiveTwo,2*waitTimer);
+                setTimeout(returnInc,4*waitTimer-2000);     
+                setTimeout(showMoney,4*waitTimer-2000);     
                 
-                $.ajax
-                ({
-                    type: "GET",
-                    dataType : 'Text',
-                    async: false,
-                    url: 'Tracker2.txt',
-                    cache: false,
-                    success: function (data) {
-                        $("#nextInc").text(data);
-                    },
-                    failure: function() {}
-                });
-            
-                 $.ajax
-                ({
-                    type: "GET",
-                    dataType : 'Text',
-                    async: false,
-                    url: 'TwitchAlerts/session_donation_amount.txt',
-                    cache: false,
-                    success: function (data) {
-                        $("#dollarvalue").text(data);
-                    },
-                    failure: function() {}
-                });
+                setTimeout(showSlide,4*waitTimer);
+                setTimeout(showSlide,6*waitTimer-2000);
+                setTimeout(showMoney,6*waitTimer-2000);
+                
+                setTimeout(showMessage1,6*waitTimer);
+                setTimeout(returnInc,8*waitTimer-2000);     
+                setTimeout(showMoney,8*waitTimer-2000);     
+                
+                setTimeout(showMessage2,8*waitTimer);
+                setTimeout(returnInc,10*waitTimer-2000);     
+                setTimeout(showMoney,10*waitTimer-2000);     
+                
             
                 // If less than raised, set current, then set next
                 
-                setTimeout(myvar,5000);    
+                setTimeout(myvar,10*waitTimer);    
             }
 
         
         myvar();
+        
+        var seconds = 0;
+        var minutes = 0;
+        var hours = 0;
+        var stopwatch = function() {
+            seconds++;
+            if (seconds % 60 == 0) {
+                minutes++;
+                seconds = 0;
+            }
+            if (minutes % 60 == 0 && minutes != 0) {
+                hours++;
+                minutes = 0;
+            }
+            $("#timer").text("" + hours + ":" + minutes + ":" + seconds + "");
+//            $("#timer").text("0" + ":" + "00" + ":" + "0" + "");
+            setTimeout(stopwatch,1000);
+
+        }
+        stopwatch();
     </script>
 </body>
 </html>

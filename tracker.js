@@ -4,6 +4,7 @@ function getSessionTotal() {
         type: "GET",
         dataType : 'text',
         async: false,
+        cache:false,
         url: "TwitchAlerts/session_donation_amount.txt",
         success: function(data) {
             donationTotal = data;
@@ -19,6 +20,7 @@ function getStreamTitle() {
     var hello = $.ajax({
                 type:'GET',
                 async: false,
+                cache: false,
                 dataType: 'json',
                 url: "getGameName.php",
                 success: function(data){

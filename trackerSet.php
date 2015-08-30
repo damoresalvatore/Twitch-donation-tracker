@@ -1,4 +1,4 @@
-<html lang="en">
+e<html lang="en">
 <head>
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
@@ -72,7 +72,10 @@
             // Get the currently playing game
             var channel = getStreamTitle();
             // Literal value for the game
+            
+            // REMEMBER TO PUT THIS BACK
             gameIndicator = gameValue(channel.stream.game);
+            console.log(channel.stream.game);
             // Sets the games baseline value to total, if its the first time
             // the game is played
             if (incentiveObject.games[gameIndicator].touched == false) {
@@ -108,6 +111,7 @@
                 // Do this if we've met the final incentive for this game
                 if (currentIncentiveNum == incentiveObject.games[gameIndicator].incentives.length - 1 && currentRaised>= incentiveObject.games[gameIndicator].incentives[currentIncentiveNum].money) {
                     currentIncentive = "all incentives met in this game";
+                    nextIncentive = "all incentives met in this game"
                 } else {
                     
                     // Calculate the money left until the next incentive is reached
@@ -124,7 +128,7 @@
                     var remainingUntil = globaTotal - sessionTotal;
                         nextIncentive = "$" + remainingUntil + " until " + incentiveObject.games[gameIndicator].incentives[currentIncentiveNum + 1].desc + ""
                     } else {
-                        nextIncentive = "done";
+                        nextIncentive = "Only one incentive left";
                     }
                 }
                 
@@ -175,7 +179,7 @@
             });
     
             
-            setTimeout(myvar,2000);
+            setTimeout(myvar,5000);
         }
         myvar();
     </script>

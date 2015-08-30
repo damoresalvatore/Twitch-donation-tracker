@@ -3,7 +3,7 @@ $ftp_server="ftp.mikemoniz.com";
 $ftp_user_name="UpATree"; 
 $ftp_user_pass="550Minera!s"; 
 $file = "general.json";//tobe uploaded 
-$remote_file = "general.json"; 
+$remote_file = "/views/general.json"; 
 
 // set up basic connection 
 $conn_id = ftp_connect($ftp_server); 
