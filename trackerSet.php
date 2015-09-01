@@ -25,12 +25,6 @@ e<html lang="en">
     </div>
     
     <script>
-        $.ajax({ 
-            url: 'sendFTP.php',
-            success: function() {
-                alert("hello");
-            }
-        });
         
         //      Get the text file
         var xmlhttp, jsonstuff, sessionTotal;
@@ -74,8 +68,11 @@ e<html lang="en">
             // Literal value for the game
             
             // REMEMBER TO PUT THIS BACK
-            gameIndicator = gameValue(channel.stream.game);
-            console.log(channel.stream.game);
+            gameIndicator = 1; 
+            //gameValue(channel.stream.game);
+//            console.log(channel.stream.game);
+            
+            incentiveObject.currentgamenum = gameIndicator;
             // Sets the games baseline value to total, if its the first time
             // the game is played
             if (incentiveObject.games[gameIndicator].touched == false) {
@@ -138,7 +135,7 @@ e<html lang="en">
                 
                    
             }
-            
+            incentiveObject.total = sessionTotal;
 // Because OBS is stupid and won't stop caching, we have to save the incentives to text file, then a second script will display these on screen.
 
 //          Call PHP that saves the jsn file.
@@ -182,6 +179,16 @@ e<html lang="en">
             setTimeout(myvar,5000);
         }
         myvar();
+        var sendFile = function() {
+            $.ajax({ 
+            url: 'sendFTP.php',
+            success: function() {
+            }
+            });
+            setTimeout(sendFile,30000);
+        }
+        sendFile();
+        
     </script>
 </body>
 </html>
