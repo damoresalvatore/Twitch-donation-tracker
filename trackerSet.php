@@ -68,11 +68,12 @@ e<html lang="en">
             // Literal value for the game
             
             // REMEMBER TO PUT THIS BACK
-            gameIndicator = 1; 
-            //gameValue(channel.stream.game);
+            gameIndicator = gameValue(channel.stream.game);
 //            console.log(channel.stream.game);
             
+            // For website use to select the correct game
             incentiveObject.currentgamenum = gameIndicator;
+            
             // Sets the games baseline value to total, if its the first time
             // the game is played
             if (incentiveObject.games[gameIndicator].touched == false) {

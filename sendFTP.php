@@ -1,7 +1,7 @@
 <?php 
 $ftp_server="ftp.mikemoniz.com"; 
-$ftp_user_name="UpATree"; 
-$ftp_user_pass="550Minera!s"; 
+$ftp_user_name=""; 
+$ftp_user_pass=""; 
 $file = "general.json";//tobe uploaded 
 $remote_file = "/views/Marathon/general.json"; 
 
