@@ -186,7 +186,7 @@ e<html lang="en">
             success: function() {
             }
             });
-            setTimeout(sendFile,30000);
+            setTimeout(sendFile,60000);
         }
         sendFile();
         
